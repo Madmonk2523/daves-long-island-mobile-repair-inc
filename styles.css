@@ -386,22 +386,62 @@ section {
     background: var(--light-bg);
 }
 
+.specialties-banner {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+}
+
+.specialties-banner h3 {
+    color: var(--dark-bg);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.specialties-banner h3 i {
+    color: var(--white);
+}
+
+.specialty-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.specialty-tag {
+    background: var(--white);
+    color: var(--text-dark);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
 .service-card {
     background: var(--white);
-    padding: 2.5rem;
-    border-radius: 20px;
+    padding: 2rem;
+    border-radius: 15px;
     box-shadow: var(--shadow-md);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
     transform: translateY(30px);
     position: relative;
     overflow: hidden;
+    text-align: center;
 }
 
 .service-card::before {
@@ -425,58 +465,42 @@ section {
 }
 
 .service-card:hover {
-    transform: translateY(-15px) scale(1.02);
+    transform: translateY(-10px) scale(1.03);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .service-icon {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: var(--gradient-2);
-    border-radius: 20px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin: 0 auto 1.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
 }
 
 .service-card:hover .service-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.1) rotate(10deg);
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
 }
 
 .service-icon i {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--white);
 }
 
 .service-card h3 {
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
     color: var(--text-dark);
 }
 
-.service-card > p {
+.service-card p {
     color: var(--text-light);
-    margin-bottom: 1.5rem;
-}
-
-.service-features {
-    list-style: none;
-}
-
-.service-features li {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-light);
-}
-
-.service-features i {
-    color: var(--secondary-color);
+    line-height: 1.6;
 }
 
 /* About Section */
