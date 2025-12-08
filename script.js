@@ -291,4 +291,134 @@ if ('IntersectionObserver' in window) {
     images.forEach(img => imageObserver.observe(img));
 }
 
-console.log('Dave\'s Long Island Mobile Repair Website Loaded Successfully! 🚀');
+// Enhanced form validation
+if (contactForm) {
+    const inputs = contactForm.querySelectorAll('input, select, textarea');
+    
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => {
+            validateField(input);
+        });
+        
+        input.addEventListener('input', () => {
+            if (input.classList.contains('error')) {
+                validateField(input);
+            }
+        });
+    });
+}
+
+function validateField(field) {
+    const value = field.value.trim();
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Remove existing error
+    const existingError = field.parentElement.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    field.classList.remove('error');
+    
+    // Validation rules
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        errorMessage = 'This field is required';
+    } else if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid email address';
+        }
+    } else if (field.type === 'tel' && value) {
+        const phoneRegex = /^[\d\s\-\(\)]+$/;
+        if (!phoneRegex.test(value) || value.replace(/\D/g, '').length < 10) {
+            isValid = false;
+            errorMessage = 'Please enter a valid phone number';
+        }
+    }
+    
+    if (!isValid) {
+        field.classList.add('error');
+        const error = document.createElement('span');
+        error.className = 'error-message';
+        error.textContent = errorMessage;
+        error.style.cssText = `
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: block;
+        `;
+        field.parentElement.appendChild(error);
+    }
+    
+    return isValid;
+}
+
+// Add error styles
+const errorStyle = document.createElement('style');
+errorStyle.textContent = `
+    .form-group input.error,
+    .form-group select.error,
+    .form-group textarea.error {
+        border-color: #dc2626 !important;
+        background-color: #fee;
+    }
+`;
+document.head.appendChild(errorStyle);
+
+// Smooth number formatting for phone inputs
+const phoneInputs = document.querySelectorAll('input[type="tel"]');
+phoneInputs.forEach(input => {
+    input.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 0) {
+            if (value.length <= 3) {
+                value = `(${value}`;
+            } else if (value.length <= 6) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+            } else {
+                value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+            }
+        }
+        e.target.value = value;
+    });
+});
+
+// Add loading state to form submission
+if (contactForm) {
+    const originalSubmitHandler = contactForm.onsubmit;
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Validate all fields
+        const inputs = contactForm.querySelectorAll('input, select, textarea');
+        let isFormValid = true;
+        inputs.forEach(input => {
+            if (!validateField(input)) {
+                isFormValid = false;
+            }
+        });
+        
+        if (!isFormValid) {
+            showNotification('Please correct the errors in the form', 'error');
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        // Simulate sending (replace with actual API call)
+        setTimeout(() => {
+            showNotification('Thank you! We\'ll contact you within 24 hours.', 'success');
+            contactForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }, 1500);
+    });
+}
+
+console.log('DAVE\'S FLEET REPAIR - Website Loaded Successfully! 🚛');
