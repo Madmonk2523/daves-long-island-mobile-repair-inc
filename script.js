@@ -423,4 +423,4 @@ if (contactForm) {
     });
 }
 
-console.log('DAVE\'S FLEET REPAIR - Website Loaded Successfully! ≡ƒÜ¢');
+console.log('DAVE\'S FLEET REPAIR - Website Loaded Successfully!');
